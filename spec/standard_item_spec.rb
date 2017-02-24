@@ -5,7 +5,6 @@ describe StandardItem do
   describe "#update_quality" do
     it "does not change the name" do
       item = StandardItem.new("foo", 0, 0)
-      p item
       expect(item.name).to eq "foo"
     end
 
