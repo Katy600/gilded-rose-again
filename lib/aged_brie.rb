@@ -2,9 +2,11 @@ require_relative 'item'
 
 class AgedBrie < Item
   SELL_IN_REDUCTION = 1
+  QUALITY_INCREASE_BEFORE_SELL_IN = 1
+  QUALITY_INCREASE_AFTER_SELL_IN = 2
 
   def update_quality
-    within_sell_by_date
+    self.sell_in <= 0 ? past_sell_by_date : within_sell_by_date
   end
 
   def within_sell_by_date
@@ -17,6 +19,16 @@ class AgedBrie < Item
   end
 
   def quality_increases_by_one
-    self.quality += 1
+    self.quality += QUALITY_INCREASE_BEFORE_SELL_IN
   end
+
+  def quality_increases_by_two
+    self.quality += QUALITY_INCREASE_AFTER_SELL_IN
+  end
+
+  def past_sell_by_date
+    sell_in_decreases_by_one
+    quality_increases_by_two
+  end
+
 end
