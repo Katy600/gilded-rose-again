@@ -10,4 +10,9 @@ describe 'AgedBrie' do
     item = AgedBrie.new("Aged Brie", 0, 5)
     expect {item.update_quality()}.to change {item.quality}.by(2)
   end
+
+  it "Quality never goes above 50" do
+    item = AgedBrie.new("Aged Brie", 0, 50)
+    expect {item.update_quality()}.not_to change {item.quality}
+  end
 end
